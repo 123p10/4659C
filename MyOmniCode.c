@@ -79,7 +79,7 @@ void pre_auton()
 	SensorValue[Lift] = 0;
 	SensorValue[LDrive] = 0;
 	SensorValue[RDrive] = 0;
-
+	playSoundFile("september.wav");
 }
 
 task autonomous()
