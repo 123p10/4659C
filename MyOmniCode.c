@@ -1,8 +1,8 @@
 #pragma config(Sensor, in7,    ClawRight,      sensorPotentiometer)
 #pragma config(Sensor, in8,    ClawLeft,       sensorPotentiometer)
 #pragma config(Sensor, dgtl1,  LDrive,         sensorQuadEncoder)
-#pragma config(Sensor, dgtl3,  RDrive,         sensorQuadEncoder)
 #pragma config(Sensor, dgtl5,  Lift,           sensorQuadEncoder)
+#pragma config(Sensor, dgtl8,  RDrive,         sensorQuadEncoder)
 #pragma config(Motor,  port1,           ClawL,         tmotorVex393_HBridge, openLoop)
 #pragma config(Motor,  port2,           LD,            tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port3,           LD2,           tmotorVex393_MC29, openLoop)
@@ -28,9 +28,6 @@
 //ClawR Right Claw
 
 
-/**/
-/*Kush test the turning code. Make it better and make sure the values work*/
-/**/
 
 int auton = 2;
 
@@ -49,7 +46,7 @@ int auton = 2;
 
 
 //Turns on and off debugstreams
-bool isDebug = true;
+bool isDebug = false;
 //Deadzone for controller
 int deadzone = 15;
 //Speed of lift should ussually be 127 though because less speed = less torque
@@ -105,16 +102,15 @@ task autonomous()
 
 
 
-
 }
 
 void goodCompetitionAutonL(){
 	moveClaws(127,1040,2000);
-	drivePID(100,100);
-	turn(100,-100);
+	drivePID(100,200);
+	turn(300,-300);
 	drivePID(100,150);
 	moveClaws(-127,300,800);
-	turn(100,-100);
+	turn(300,-300);
 	score(700,1140,1680,500,-100,-100,0);
 	moveLiftPID(-127,0);
 	drivePID(100,150);
@@ -123,15 +119,15 @@ void goodCompetitionAutonL(){
 }
 void goodCompetitionAutonR(){
 	moveClaws(127,1040,2000);
-	drivePID(100,100);
-	turn(-100,100);
+	drivePID(100,200);
+	turn(-300,300);
 	drivePID(100,150);
 	moveClaws(-127,300,800);
-	turn(-100,100);
+	turn(-300,300);
 	score(700,1140,1680,500,-100,-100,0);
 	moveLiftPID(-127,0);
 	drivePID(100,150);
-	moveClaws(-127,300,800)
+	moveClaws(-127,300,800);
 	score(700,1140,1680,600,-200,-100,-100);
 
 }
@@ -143,7 +139,7 @@ void skillsAuton(){
 	moveClaws(127,1040,2000);
 	drivePID(100,20);
 	wait1Msec(750);
-	moveClaws(-127,300,800);
+	moveClaws(-127,150,550);
 	moveClaw(-50);
 	score(700,1140,1680,600,-300,-100,-200);
 
@@ -151,8 +147,8 @@ void skillsAuton(){
 	moveLiftPID(-127,0);
 	drivePID(100,350);
 	wait1Msec(950);
-	moveClaws(-127,150,550);
-	moveClaw(-15);
+	moveClaws(-127,300,800);
+	moveClaw(-50);
 	score(700,1140,1680,500,-300,-100,-200);
 	moveLiftPID(-127,0);
 	/*Working Leave Here*/
@@ -162,12 +158,14 @@ void skillsAuton(){
 	/*Testing Code work with Values*/
 
 	//Move to middle Cube
-	drivePID(100,100);
-	turn(100,-100);
-	drivePID(100,100);
-	moveClaws(-127,150,550);
-	drivePID(100,100);
-	turn(-100,100);
+	drivePID(100,250);
+	turn(300,-300);
+	moveClaws(127,1040,2000);
+	drivePID(100,200);
+	moveClaws(-127,0,0);
+	moveClaw(-50);
+	drivePID(100,300);
+	turn(-300,300);
 	score(700,1140,1680,500,-100,-100,0);
 
 	//Cube in front of far fence
@@ -271,7 +269,7 @@ void score(int liftH,int clawsL,int clawsR,int openClawH,int dist,int speed,int 
 		}
 	}
 	if(SensorValue[Lift] > 650){
-		moveLift(-15)
+		moveLift(-15);
 	}
 	else{
 		moveLift(15);
@@ -636,7 +634,7 @@ void turn(int distL,int distR){
 	while(abs(SensorValue[LDrive]) < abs(distL)){
 		if(distL < 0){
 			motor[LD] = -127;
-			motor[LD2] = -127
+			motor[LD2] = -127;
 		}
 		else{
 			motor[LD] = 127;
