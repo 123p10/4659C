@@ -171,7 +171,8 @@ void skillsAuton(){
 	//Cube in front of far fence
 	moveLiftPID(-127,0);
 	drivePID(100,350);
-	moveClaws(-127,150,550);
+	moveClaws(-127,0,0);
+	moveClaw(-50);
 	score(700,1140,1680,500,-300,-100,-200);
 
 }
