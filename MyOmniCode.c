@@ -79,7 +79,7 @@ void pre_auton()
 	SensorValue[Lift] = 0;
 	SensorValue[LDrive] = 0;
 	SensorValue[RDrive] = 0;
-	playSoundFile("september.wav");
+//	playSoundFile("september.wav");
 }
 
 task autonomous()
@@ -163,7 +163,7 @@ void skillsAuton(){
 	moveClaws(127,1040,2000);
 	drivePID(100,200);
 	moveClaws(-127,0,0);
-	moveClaw(-50);
+	moveClaw(-127);
 	drivePID(100,300);
 	turn(-300,300);
 	score(700,1140,1680,500,-100,-100,0);
